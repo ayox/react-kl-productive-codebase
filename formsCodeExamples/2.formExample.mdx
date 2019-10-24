@@ -5,9 +5,8 @@ import {
 } from "code-surfer";
 import { github,nightOwl, vsDark } from "@code-surfer/themes";
 
-
-import forms3 from './form3.png'
-import forms4 from './forms4.gif'
+import forms from '../form1.png'
+import forms2 from '../form2.png'
 
 
 
@@ -16,7 +15,57 @@ import forms4 from './forms4.gif'
 
 <Step>
 
-```jsx 8:47 subtitle="Let's make it fetch from database"
+```jsx 12:34 subtitle="Let's add a Select for Employment Type?"
+import React from "react";
+import { Form, Input, Button } from "antd";
+
+function EmployeeForm(props) {
+  const { getFieldDecorator, validateFields } = props.form;
+  function handleSubmit(e) {
+    e.preventDefault();
+    validateFields((err, values) => {
+      // submit logic
+      console.log(values);
+    });
+  }
+  return (
+    <Form layout="horizontal" onSubmit={handleSubmit}>
+      <Form.Item label="Full Name">
+        {getFieldDecorator("fullName")(
+          <Input placeholder="Enter your full name" />
+        )}
+      </Form.Item>
+      <Form.Item label="Passport">
+        {getFieldDecorator("passport")(
+          <Input placeholder="Please enter your passport no" />
+        )}
+      </Form.Item>
+      <Form.Item>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
+  );
+}
+
+const WrappedEmployeeForm = Form.create({ name: "employee_form" })(
+  EmployeeForm
+);
+
+export default WrappedEmployeeForm;
+
+```
+
+<Image src={forms} size='80%'></Image>
+
+
+</Step>
+
+<Step>
+
+```jsx
+
 import React from "react";
 import { Form, Select, Input, Button } from "antd";
 
@@ -71,90 +120,10 @@ const WrappedEmployeeForm = Form.create({ name: "employee_form" })(
 
 export default WrappedEmployeeForm;
 
-```
-
-<Image src={forms3} size='80%'></Image>
-
-
-</Step>
-
-<Step>
-
-```jsx
-
-import React from "react";
-import { Form, Select, Input, Button } from "antd";
-import { employmentsTypes } from "./api.js";
-const { Option } = Select;
-
-function EmployeeForm(props) {
-  const { getFieldDecorator, validateFields } = props.form;
-  function handleSubmit(e) {
-    e.preventDefault();
-    validateFields((err, values) => {
-      // submit logic
-      console.log(values);
-    });
-  }
-
-  const [types, setTypes] = React.useState([]);
-  const [fetching, setFetching] = React.useState(false);
-
-  async function fetchEmploymentTypes() {
-    const types = await employmentsTypes();
-    setTypes(types);
-    setFetching(false);
-  }
-  React.useEffect(() => {
-    setFetching(true);
-    fetchEmploymentTypes();
-  }, []);
-
-  return (
-    <Form layout="horizontal" onSubmit={handleSubmit}>
-      <Form.Item label="Full Name">
-        {getFieldDecorator("fullName")(
-          <Input placeholder="Enter your full name" />
-        )}
-      </Form.Item>
-      <Form.Item label="Passport">
-        {getFieldDecorator("passport")(
-          <Input placeholder="Please enter your passport no" />
-        )}
-      </Form.Item>
-      {fetching ? (
-        "Loading ..."
-      ) : (
-        <Form.Item label="Employment Type">
-          {getFieldDecorator("employmentType")(
-            <Select placeholder="Please Select">
-              {types.map(t => (
-                <Option value={t.name}>{t.name}</Option>
-              ))}
-            </Select>
-          )}
-        </Form.Item>
-      )}
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
-  );
-}
-
-const WrappedEmployeeForm = Form.create({ name: "employee_form" })(
-  EmployeeForm
-);
-
-export default WrappedEmployeeForm;
-
-
 
 ```
 
-<Image src={forms4} size='80%'></Image>
+<Image src={forms2} size='80%'></Image>
 
 
 </Step>
