@@ -1,0 +1,194 @@
+import {
+  CodeSurfer,
+  CodeSurferColumns,
+  Step,
+} from "code-surfer";
+import { github,nightOwl, vsDark } from "@code-surfer/themes";
+
+
+import forms3 from './form3.png'
+import forms5 from './forms5.png'
+
+
+
+
+<CodeSurferColumns themes={[vsDark, github]}>
+
+<Step>
+
+```jsx 8:47 subtitle="What about sorting ?? "
+
+import React from "react";
+import { Form, Select, Input, Button } from "antd";
+import { employmentsTypes } from "./api.js";
+const { Option } = Select;
+
+function EmployeeForm(props) {
+  const { getFieldDecorator, validateFields } = props.form;
+  function handleSubmit(e) {
+    e.preventDefault();
+    validateFields((err, values) => {
+      // submit logic
+      console.log(values);
+    });
+  }
+
+  const [types, setTypes] = React.useState([]);
+  const [fetching, setFetching] = React.useState(false);
+
+  async function fetchEmploymentTypes() {
+    const types = await employmentsTypes();
+    setTypes(types);
+    setFetching(false);
+  }
+  React.useEffect(() => {
+    setFetching(true);
+    fetchEmploymentTypes();
+  }, []);
+
+  return (
+    <Form layout="horizontal" onSubmit={handleSubmit}>
+      <Form.Item label="Full Name">
+        {getFieldDecorator("fullName")(
+          <Input placeholder="Enter your full name" />
+        )}
+      </Form.Item>
+      <Form.Item label="Passport">
+        {getFieldDecorator("passport")(
+          <Input placeholder="Please enter your passport no" />
+        )}
+      </Form.Item>
+      {fetching ? (
+        "Loading ..."
+      ) : (
+        <Form.Item label="Employment Type">
+          {getFieldDecorator("employmentType")(
+            <Select placeholder="Please Select">
+              {types.map(t => (
+                <Option value={t.name}>{t.name}</Option>
+              ))}
+            </Select>
+          )}
+        </Form.Item>
+      )}
+      <Form.Item>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
+  );
+}
+
+const WrappedEmployeeForm = Form.create({ name: "employee_form" })(
+  EmployeeForm
+);
+
+export default WrappedEmployeeForm;
+
+```
+
+<Image src={forms3} size='80%'></Image>
+
+
+</Step>
+
+<Step>
+
+```jsx
+
+import React from "react";
+import { Form, Select, Input, Button } from "antd";
+import { employmentsTypes } from "./api.js";
+const { Option } = Select;
+
+function EmployeeForm(props) {
+  const { getFieldDecorator, validateFields } = props.form;
+  function handleSubmit(e) {
+    e.preventDefault();
+    validateFields((err, values) => {
+      // submit logic
+      console.log(values);
+    });
+  }
+
+  const [types, setTypes] = React.useState([]);
+  const [fetching, setFetching] = React.useState(false);
+
+  async function fetchEmploymentTypes() {
+    const types = await employmentsTypes();
+    const sortedTypes = types.sort(function(a, b) {
+      var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+      var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+
+      // names must be equal
+      return 0;
+    });
+    setTypes(sortedTypes);
+    setFetching(false);
+  }
+  React.useEffect(() => {
+    setFetching(true);
+    fetchEmploymentTypes();
+  }, []);
+
+  return (
+    <Form layout="horizontal" onSubmit={handleSubmit}>
+      <Form.Item label="Full Name">
+        {getFieldDecorator("fullName")(
+          <Input placeholder="Enter your full name" />
+        )}
+      </Form.Item>
+      <Form.Item label="Passport">
+        {getFieldDecorator("passport")(
+          <Input placeholder="Please enter your passport no" />
+        )}
+      </Form.Item>
+      {fetching ? (
+        "Loading ..."
+      ) : (
+        <Form.Item label="Employment Type">
+          {getFieldDecorator("employmentType")(
+            <Select placeholder="Please Select">
+              {types.map(t => (
+                <Option value={t.name}>{t.name}</Option>
+              ))}
+            </Select>
+          )}
+        </Form.Item>
+      )}
+      <Form.Item>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
+  );
+}
+
+const WrappedEmployeeForm = Form.create({ name: "employee_form" })(
+  EmployeeForm
+);
+
+export default WrappedEmployeeForm;
+
+
+
+```
+
+<Image src={forms5} size='80%'></Image>
+
+
+</Step>
+
+
+
+
+</CodeSurferColumns>
+
