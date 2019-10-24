@@ -11,6 +11,7 @@ import FormsExampleCode3 from './3.formExample.mdx'
 import FormsExampleCode4 from './4.formExample.mdx'
 import FormsExampleCode5 from './5.formExample.mdx'
 import FormsExampleCode6 from './6.formExample.mdx'
+import FormsExampleCode7 from './7.formExample.mdx'
 
 export const theme = github;
 import { FullScreenCode } from 'mdx-deck'
@@ -19,6 +20,10 @@ import { Image } from 'mdx-deck'
 
 import forms from './forms.png'
 import dataTable from './Datalist.png'
+const styledBottomBorder = {width:"fit-content", textAlign: "center",borderBottom: '10px solid',
+borderImageSource: "linear-gradient(120deg, #1890ff, #db18ff)",
+  borderImageSlice: 5,
+}
 
 # A Productive React Codebase🚀
 
@@ -44,10 +49,7 @@ import dataTable from './Datalist.png'
 
 ---
 
-<h3> Our goal is to create a <strong style={{width:"fit-content", textAlign: "center",borderBottom: '10px solid',
-borderImageSource: "linear-gradient(120deg, #1890ff, #db18ff)",
-  borderImageSlice: 5,
-}}>productive</strong> codebase </h3>
+<h3> Our goal is to create a <strong style={styledBottomBorder}>productive</strong> codebase </h3>
 
 ---
 
@@ -148,10 +150,11 @@ Ability to re-use stateful logic between components.
 
 ---
 
-<strong style={{width:"fit-content", textAlign: "center",borderBottom: '10px solid',
-borderImageSource: "linear-gradient(120deg, #1890ff, #db18ff)",
-  borderImageSlice: 5,
-}}>Recap</strong>
+<strong style={styledBottomBorder}>Recap</strong>
+
+---
+
+<FormsExampleCode7/>
 
 ---
 
@@ -161,6 +164,12 @@ borderImageSource: "linear-gradient(120deg, #1890ff, #db18ff)",
 - Are you confident when coding? 😎
 - Is the codebase easy to explain to new developers?🤓
 - How long it takes to fix a problem ? 🕐
+
+---
+
+### Don't be afraid to refactor
+
+<span style={styledBottomBorder}>It's Worth it</span>
 
 ---
 
