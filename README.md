@@ -1,6 +1,4 @@
-# MDX Deck + Code Surfer template
-
-This project was generated with the `npm init code-surfer-deck` command.
+This is the slides for the talk. you can find the source code in demo here : https://codesandbox.io/s/late-waterfall-6b86p
 
 ## Development
 
